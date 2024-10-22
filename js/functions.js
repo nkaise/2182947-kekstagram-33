@@ -2,7 +2,7 @@ function checkStringLength (string, maxLength) {
   return string.length <= maxLength;
 }
 
-checkStringLength();
+checkStringLength('проверяемая строка', 18);
 
 function isPalindrome (string) {
   string = string.replaceAll(' ', '').toLowerCase();
@@ -13,7 +13,7 @@ function isPalindrome (string) {
   return string === validateString;
 }
 
-isPalindrome();
+isPalindrome('ДовОд');
 
 function extractNumberFromString (string) {
   let number = '';
@@ -26,4 +26,4 @@ function extractNumberFromString (string) {
   return number !== '' ? +number : NaN;
 }
 
-extractNumberFromString();
+extractNumberFromString('1 кефир, 0.5 батона');
