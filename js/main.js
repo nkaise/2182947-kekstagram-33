@@ -10,6 +10,9 @@ const DESCRIPTION = [
   'Дети играют на пляже у воды.',
   'Пустыня с одиноким кактусом на закате.'
 ];
+let currentIdIndex = -1;
+let currentUrlIndex = -1;
+
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -20,7 +23,7 @@ const getRandomInteger = (a, b) => {
 const checkForDuplicateIds = () => {
   const idsArray = [];
   const generateId = (a, b) => {
-    const id = getRandomInteger(a, b);
+    const id = getRandomInteger(1, 25);
     if (!idsArray.includes(id)) {
       idsArray.push(id);
     }
@@ -31,11 +34,16 @@ const checkForDuplicateIds = () => {
   return idsArray;
 };
 
+const idArray = checkForDuplicateIds();
+const urlArray = checkForDuplicateIds();
+
 const createPhotoPost = () => ({
-  id: `${checkForDuplicateIds()[getRandomInteger(1,25)]}`,
-  url: `photos/${checkForDuplicateIds()[getRandomInteger(1,25)]}.jpg`,
+  id: `${idArray[currentIdIndex++]}`,
+  url: `photos/${urlArray[currentUrlIndex++]}.jpg`,
   description: DESCRIPTION[`${getRandomInteger(0,9)}`],
   likes: `${[getRandomInteger(15,200)]}`
 });
 
 createPhotoPost();
+
+const similarWizards = Array.from({length: 25}, createPhotoPost);
