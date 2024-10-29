@@ -45,7 +45,7 @@ const NAMES_MAX_ID = 9;
 const SIMILAR_POST_DESCRIPTION_COUNT = 25;
 let currentIdIndex = 0;
 let currentUrlIndex = 0;
-let currentCommentIndex = 1;
+let currentCommentIndex = 0;
 
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -54,23 +54,25 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
+const createSimilarPost = (length, functionName) => Array.from({length: length}, functionName);
+
 const createComment = () => ({
-  id: `${currentCommentIndex++}`,
+  id: `${++currentCommentIndex}`,
   avatar: `img/avatar-${getRandomInteger(AVATAR_MIN_ID,AVATAR_MAX_ID)}.svg`,
   message: MESSAGES[`${getRandomInteger(MESSAGES_MIN_ID,MESSAGES_MAX_ID)}`],
   name: NAMES[`${getRandomInteger(NAMES_MIN_ID,NAMES_MAX_ID)}`]
 });
 
-const comments = Array.from({length: getRandomInteger(COMMENTS_MIN_AMOUNT,COMMENTS_MAX_AMOUNT)}, createComment);
+const comments = createSimilarPost((getRandomInteger(COMMENTS_MIN_AMOUNT,COMMENTS_MAX_AMOUNT)), createComment);
 
 const createPhotoPost = () => ({
-  id: `${currentIdIndex++}`,
-  url: `photos/${currentUrlIndex++}.jpg`,
+  id: `${++currentIdIndex}`,
+  url: `photos/${++currentUrlIndex}.jpg`,
   description: DESCRIPTIONS[`${getRandomInteger(DESCRIPTION_MIN_ID,DESCRIPTION_MAX_ID)}`],
   likes: `${[getRandomInteger(LIKES_MIN_AMOUNT,LIKES_MAX_AMOUNT)]}`,
   comments
 });
 
-createPhotoPost();
-const similarWizards = Array.from({length: SIMILAR_POST_DESCRIPTION_COUNT}, createPhotoPost);
-console.log(similarWizards);
+const similarPosts = createSimilarPost(SIMILAR_POST_DESCRIPTION_COUNT, createPhotoPost);
+
+console.log(similarPosts);
