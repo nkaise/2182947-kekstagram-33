@@ -1,4 +1,4 @@
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Закатное небо над тихим океаном.',
   'Горный пейзаж, скрытый утренним туманом.',
   'Солнечные лучи сквозь осенние листья.',
@@ -10,7 +10,7 @@ const DESCRIPTION = [
   'Дети играют на пляже у воды.',
   'Пустыня с одиноким кактусом на закате.'
 ];
-const MESSAGE = [
+const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -19,20 +19,33 @@ const MESSAGE = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 const NAMES = [
-  'Александр',
-  'Екатерина',
+  'Иван',
+  'Матвей',
   'Дмитрий',
   'Анна',
   'Сергей',
-  'Ольга',
+  'Оксана',
   'Михаил',
   'Мария',
   'Илья',
   'Наталья'
 ];
-let currentIdIndex = -1;
-let currentUrlIndex = -1;
-let currentCommentIndex = -1;
+const LIKES_MIN_AMOUNT = 15;
+const LIKES_MAX_AMOUNT = 200;
+const COMMENTS_MIN_AMOUNT = 0;
+const COMMENTS_MAX_AMOUNT = 30;
+const AVATAR_MIN_ID = 1;
+const AVATAR_MAX_ID = 6;
+const DESCRIPTION_MIN_ID = 0;
+const DESCRIPTION_MAX_ID = 9;
+const MESSAGES_MIN_ID = 0;
+const MESSAGES_MAX_ID = 5;
+const NAMES_MIN_ID = 0;
+const NAMES_MAX_ID = 9;
+const SIMILAR_POST_DESCRIPTION_COUNT = 25;
+let currentIdIndex = 0;
+let currentUrlIndex = 0;
+let currentCommentIndex = 1;
 
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -41,39 +54,23 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-const checkForDuplicateIds = (min, max) => {
-  const idArray = [];
-  const generateId = () => {
-    const id = getRandomInteger(min, max);
-    if (!idArray.includes(id)) {
-      idArray.push(id);
-    }
-  };
-  while (idArray.length !== max) {
-    generateId(min, max);
-  }
-  return idArray;
-};
+const createComment = () => ({
+  id: `${currentCommentIndex++}`,
+  avatar: `img/avatar-${getRandomInteger(AVATAR_MIN_ID,AVATAR_MAX_ID)}.svg`,
+  message: MESSAGES[`${getRandomInteger(MESSAGES_MIN_ID,MESSAGES_MAX_ID)}`],
+  name: NAMES[`${getRandomInteger(NAMES_MIN_ID,NAMES_MAX_ID)}`]
+});
 
-const idsArray = checkForDuplicateIds(1,25);
-const urlsArray = checkForDuplicateIds(1,25);
-const commentsArray = checkForDuplicateIds(1,1000);
+const comments = Array.from({length: getRandomInteger(COMMENTS_MIN_AMOUNT,COMMENTS_MAX_AMOUNT)}, createComment);
 
 const createPhotoPost = () => ({
-  id: `${idsArray[currentIdIndex++]}`,
-  url: `photos/${urlsArray[currentUrlIndex++]}.jpg`,
-  description: DESCRIPTION[`${getRandomInteger(0,9)}`],
-  likes: `${[getRandomInteger(15,200)]}`,
-  comments: [{
-    id: `${commentsArray[currentCommentIndex++]}`,
-    avatar: `img/avatar-${getRandomInteger(1,6)}.svg`,
-    message: MESSAGE[`${getRandomInteger(0,5)}`],
-    name: NAMES[`${getRandomInteger(0,9)}`]
-  }]
+  id: `${currentIdIndex++}`,
+  url: `photos/${currentUrlIndex++}.jpg`,
+  description: DESCRIPTIONS[`${getRandomInteger(DESCRIPTION_MIN_ID,DESCRIPTION_MAX_ID)}`],
+  likes: `${[getRandomInteger(LIKES_MIN_AMOUNT,LIKES_MAX_AMOUNT)]}`,
+  comments
 });
 
 createPhotoPost();
-
-const similarWizards = Array.from({length: 25}, createPhotoPost);
-
+const similarWizards = Array.from({length: SIMILAR_POST_DESCRIPTION_COUNT}, createPhotoPost);
 console.log(similarWizards);
