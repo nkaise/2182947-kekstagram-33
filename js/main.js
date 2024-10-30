@@ -73,4 +73,6 @@ const createPhotoPost = () => ({
 
 const similarPosts = generateSimilarItems(SIMILAR_POST_DESCRIPTION_COUNT, createPhotoPost);
 
-console.log(similarPosts);
+const printAllPosts = () => similarPosts;
+
+printAllPosts();
