@@ -54,7 +54,7 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-const createSimilarPost = (length, functionName) => Array.from({length: length}, functionName);
+const generateSimilarItems = (length, functionName) => Array.from({length: length}, functionName);
 
 const createComment = () => ({
   id: `${++currentCommentIndex}`,
@@ -63,16 +63,14 @@ const createComment = () => ({
   name: NAMES[`${getRandomInteger(NAMES_MIN_ID,NAMES_MAX_ID)}`]
 });
 
-const comments = createSimilarPost((getRandomInteger(COMMENTS_MIN_AMOUNT,COMMENTS_MAX_AMOUNT)), createComment);
-
 const createPhotoPost = () => ({
   id: `${++currentIdIndex}`,
   url: `photos/${++currentUrlIndex}.jpg`,
   description: DESCRIPTIONS[`${getRandomInteger(DESCRIPTION_MIN_ID,DESCRIPTION_MAX_ID)}`],
   likes: `${[getRandomInteger(LIKES_MIN_AMOUNT,LIKES_MAX_AMOUNT)]}`,
-  comments
+  comments: generateSimilarItems((getRandomInteger(COMMENTS_MIN_AMOUNT,COMMENTS_MAX_AMOUNT)), createComment)
 });
 
-const similarPosts = createSimilarPost(SIMILAR_POST_DESCRIPTION_COUNT, createPhotoPost);
+const similarPosts = generateSimilarItems(SIMILAR_POST_DESCRIPTION_COUNT, createPhotoPost);
 
 console.log(similarPosts);
