@@ -1,12 +1,9 @@
 import {similarPosts} from './generate-photo-data';
 
 const similarPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture');
-
+const picturesContainer = document.querySelector('.pictures');
 const similarPhotos = similarPosts;
-
 const similarPhotoFragment = document.createDocumentFragment();
-
-const picturesList = document.querySelector('.pictures');
 
 similarPhotos.forEach(({url, description, likes, comments}) => {
   const photoElement = similarPhotoTemplate.cloneNode(true);
@@ -17,6 +14,6 @@ similarPhotos.forEach(({url, description, likes, comments}) => {
   similarPhotoFragment.append(photoElement);
 });
 
-picturesList.append(similarPhotoFragment);
+picturesContainer.append(similarPhotoFragment);
 
-export {picturesList};
+export {picturesContainer};

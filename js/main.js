@@ -1,6 +1,6 @@
-import {picturesList} from './miniature-renderer';
+import {picturesContainer} from './miniature-renderer';
 
 // чтобы linter не выводил ошибку
-const printPhotos = () => picturesList;
+const printPhotos = () => picturesContainer;
 
 printPhotos();
