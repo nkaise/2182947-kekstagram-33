@@ -32,6 +32,7 @@ const stringToMinutes = (string) => {
   minutes = Number(minutes);
   return hours + minutes;
 };
+
 const isMeetingWithinWorkHours = (startWorkHours, endWorkHours, startMeetingHours, meetingLength) => {
   const startWorkInMinutes = stringToMinutes(startWorkHours);
   const endWorkInMinutes = stringToMinutes(endWorkHours);
