@@ -1,6 +1,6 @@
-import {similarPosts} from './generate-photo-data';
+import {picturesContainer} from './miniature-renderer';
 
-// исправление ошибок linter
-const printPosts = () => similarPosts;
+// чтобы linter не выводил ошибку
+const printPhotos = () => picturesContainer;
 
-printPosts();
+printPhotos();
