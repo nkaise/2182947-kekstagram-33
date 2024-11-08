@@ -15,4 +15,8 @@ const getUniqueValue = () => {
   };
 };
 
-export {getRandomInteger, getRandomArrayElement, getUniqueValue};
+const clearInnerElements = (block) => {
+  block.textContent = '';
+};
+
+export {getRandomInteger, getRandomArrayElement, getUniqueValue, clearInnerElements};
