@@ -1,6 +1,4 @@
-import {picturesContainer} from './miniature-renderer';
+import {renderPosts} from './miniature-rendering';
+import {similarPosts} from './generate-photo-data';
 
-// чтобы linter не выводил ошибку
-const printPhotos = () => picturesContainer;
-
-printPhotos();
+renderPosts(document.querySelector('.pictures'), similarPosts);
