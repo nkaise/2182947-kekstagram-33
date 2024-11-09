@@ -19,4 +19,6 @@ const clearInnerElements = (block) => {
   block.textContent = '';
 };
 
-export {getRandomInteger, getRandomArrayElement, getUniqueValue, clearInnerElements};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomInteger, getRandomArrayElement, getUniqueValue, clearInnerElements, isEscapeKey};
