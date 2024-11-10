@@ -53,9 +53,8 @@ const renderPostComments = (idPicture) => {
   });
 };
 
-const renderBigPicture = () => {
-  const smallPicturesContainerList = document.querySelectorAll('.picture');
-  smallPicturesContainerList.forEach((smallPicture, idPicture) => {
+const renderBigPicture = (container) => {
+  container.forEach((smallPicture, idPicture) => {
     smallPicture.addEventListener('click', () => {
       openBigPicture(bigPictureContainer, commentsCountElement, commentsLoaderElement, socialCommentsContainer);
       bigPictureElement.src = smallPicture.querySelector('.picture__img').src;
