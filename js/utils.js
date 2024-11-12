@@ -15,4 +15,10 @@ const getUniqueValue = () => {
   };
 };
 
-export {getRandomInteger, getRandomArrayElement, getUniqueValue};
+const clearInnerElements = (block) => {
+  block.textContent = '';
+};
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomInteger, getRandomArrayElement, getUniqueValue, clearInnerElements, isEscapeKey};
