@@ -1,11 +1,10 @@
-import {similarPosts} from './generate-photo-data';
 import {clearInnerElements, isEscapeKey} from './utils';
 
-const bigPictureContainer = document.querySelector('.big-picture');
-const socialCommentsContainer = document.querySelector('.social__comments');
-const socialCommentElement = document.querySelector('.social__comment');
 const similarCommentFragment = document.createDocumentFragment();
-const bigPictureCloseElement = document.querySelector('#picture-cancel');
+const bigPictureContainer = document.querySelector('.big-picture');
+const socialCommentsContainer = bigPictureContainer.querySelector('.social__comments');
+const socialCommentElement = bigPictureContainer.querySelector('.social__comment');
+const bigPictureCloseElement = bigPictureContainer.querySelector('#picture-cancel');
 const bigPictureElement = bigPictureContainer.querySelector('.big-picture__img img');
 const likesCountElement = bigPictureContainer.querySelector('.likes-count');
 const totalCommentsElement = bigPictureContainer.querySelector('.social__comment-total-count');
@@ -39,33 +38,25 @@ bigPictureCloseElement.addEventListener('click', () => {
   closeBigPicture(bigPictureContainer, socialCommentsContainer);
 });
 
-const renderPostComments = (idPicture) => {
-  similarPosts.forEach(({comments}, id) => {
-    if (idPicture === id) {
-      comments.forEach((comment) => {
-        const commentElement = socialCommentElement.cloneNode(true);
-        commentElement.querySelector('.social__picture').src = comment.avatar;
-        commentElement.querySelector('.social__text').alt = comment.name;
-        commentElement.querySelector('.social__text').textContent = comment.message;
-        similarCommentFragment.append(commentElement);
-      });
-    }
+const renderPostComments = (comments) => {
+  comments.forEach((comment) => {
+    const commentElement = socialCommentElement.cloneNode(true);
+    commentElement.querySelector('.social__picture').src = comment.avatar;
+    commentElement.querySelector('.social__text').alt = comment.name;
+    commentElement.querySelector('.social__text').textContent = comment.message;
+    similarCommentFragment.append(commentElement);
   });
 };
 
-const renderBigPicture = (container) => {
-  container.forEach((smallPicture, idPicture) => {
-    smallPicture.addEventListener('click', () => {
-      openBigPicture(bigPictureContainer, commentsCountElement, commentsLoaderElement, socialCommentsContainer);
-      bigPictureElement.src = smallPicture.querySelector('.picture__img').src;
-      likesCountElement.textContent = smallPicture.querySelector('.picture__likes').textContent;
-      totalCommentsElement.textContent = smallPicture.querySelector('.picture__comments').textContent;
-      photoDescriptionElement.textContent = smallPicture.querySelector('.picture__img').alt;
-      clearInnerElements(socialCommentsContainer);
-      renderPostComments(idPicture);
-      socialCommentsContainer.append(similarCommentFragment);
-    });
-  });
+const renderBigPicture = (smallPicture) => {
+  openBigPicture(bigPictureContainer, commentsCountElement, commentsLoaderElement, socialCommentsContainer);
+  bigPictureElement.src = smallPicture.url;
+  likesCountElement.textContent = smallPicture.likes;
+  totalCommentsElement.textContent = smallPicture.comments.length.toString();
+  photoDescriptionElement.textContent = smallPicture.description;
+  clearInnerElements(socialCommentsContainer);
+  renderPostComments(smallPicture.comments);
+  socialCommentsContainer.append(similarCommentFragment);
 };
 
 export {renderBigPicture};
