@@ -14,6 +14,7 @@ const photoDescriptionElement = bigPictureContainer.querySelector('.social__capt
 const commentsCountElement = bigPictureContainer.querySelector('.social__comment-count');
 const commentsLoaderElement = bigPictureContainer.querySelector('.comments-loader');
 let currentComments = [];
+let totalComments = COMMENTS_COUNT_STEP;
 
 const onBigPictureEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -37,7 +38,6 @@ const createPostComments = (comment) => {
   similarCommentFragment.append(commentElement);
 };
 
-let totalComments = COMMENTS_COUNT_STEP;
 const renderPostComments = () => {
   socialCommentsContainer.textContent = '';
   totalComments = totalComments > currentComments.length ? currentComments.length : totalComments;
@@ -59,6 +59,7 @@ commentsLoaderElement.addEventListener('click', () => {
 
 const openBigPicture = (pictureContainer) => {
   totalComments = COMMENTS_COUNT_STEP;
+  commentsLoaderElement.classList.remove('hidden');
   pictureContainer.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onBigPictureEscKeydown);
