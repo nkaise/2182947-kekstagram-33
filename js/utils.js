@@ -19,6 +19,10 @@ const clearInnerElements = (block) => {
   block.textContent = '';
 };
 
+const toggleClassName = (element, className) => {
+  element.classList.toggle(className);
+};
+
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomInteger, getRandomArrayElement, getUniqueValue, clearInnerElements, isEscapeKey};
+export {getRandomInteger, getRandomArrayElement, getUniqueValue, clearInnerElements, isEscapeKey, toggleClassName};
