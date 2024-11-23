@@ -4,5 +4,5 @@ import {openModalForm} from './modal-opener';
 import {uploadFormData} from './form-controller';
 
 renderPosts(document.querySelector('.pictures'), similarPosts);
-openModalForm();
+openModalForm(document.querySelector('.img-upload__input'));
 uploadFormData();
