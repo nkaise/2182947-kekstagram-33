@@ -14,7 +14,7 @@ const photoDescriptionElement = bigPictureContainer.querySelector('.social__capt
 const commentsCountElement = bigPictureContainer.querySelector('.social__comment-count');
 const commentsLoaderElement = bigPictureContainer.querySelector('.comments-loader');
 let currentComments = [];
-let totalComments = COMMENTS_COUNT_STEP;
+let shownComments = COMMENTS_COUNT_STEP;
 
 const onBigPictureEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -43,29 +43,29 @@ const renderPostComments = () => {
   commentsCountElement.classList.remove('hidden');
   commentsLoaderElement.classList.remove('hidden');
   socialCommentsContainer.textContent = '';
-  totalComments = totalComments > currentComments.length ? currentComments.length : totalComments;
-  const showPartComments = currentComments.slice(0, totalComments);
+  shownComments = shownComments > currentComments.length ? currentComments.length : shownComments;
+  const showPartComments = currentComments.slice(0, shownComments);
   for (let i = 0; i < showPartComments.length; i++) {
     createPostComments(showPartComments[i]);
   }
-  if (totalComments === currentComments.length) {
+  if (shownComments === currentComments.length) {
     toggleClassName(commentsLoaderElement, 'hidden');
     commentsLoaderElement.classList.add('hidden');
   }
   socialCommentsContainer.append(similarCommentFragment);
-  shownCommentsElement.textContent = totalComments;
+  shownCommentsElement.textContent = shownComments;
   if (currentComments.length > 5) {
     commentsLoaderElement.addEventListener('click', loadMoreComments);
   }
 };
 
 function loadMoreComments() {
-  totalComments += 5;
+  shownComments += COMMENTS_COUNT_STEP;
   renderPostComments();
 }
 
 const openBigPicture = (pictureContainer) => {
-  totalComments = COMMENTS_COUNT_STEP;
+  shownComments = COMMENTS_COUNT_STEP;
   toggleClassName(pictureContainer, 'hidden');
   toggleClassName(document.body, 'modal-open');
   document.addEventListener('keydown', onBigPictureEscKeydown);
