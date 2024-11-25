@@ -1,3 +1,4 @@
+import '../vendor/pristine/pristine.min.js';
 import {renderPosts} from './miniature-rendering';
 import {similarPosts} from './generate-photo-data';
 import {openModalForm} from './modal-opener';
