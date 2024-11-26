@@ -25,4 +25,9 @@ const toggleClassName = (element, className) => {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomInteger, getRandomArrayElement, getUniqueValue, clearInnerElements, isEscapeKey, toggleClassName};
+const stopPropagation = (evt) => {
+  evt.stopPropagation();
+  evt.preventDefault();
+};
+
+export {getRandomInteger, getRandomArrayElement, getUniqueValue, clearInnerElements, isEscapeKey, toggleClassName, stopPropagation};
