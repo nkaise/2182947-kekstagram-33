@@ -6,12 +6,12 @@ const effectLevelSlider = imagePreviewElement.querySelector('.effect-level__slid
 const effectLevelSliderContainer = imagePreviewElement.querySelector('.img-upload__effect-level');
 const imageUploadedPreviewElement = imagePreviewElement.querySelector('.img-upload__preview img');
 const imageEffectsElement = document.querySelector('.effects');
-const effectNoneElement = imageEffectsElement.querySelector('#effect-none').id;
-const effectChromeElement = imageEffectsElement.querySelector('#effect-chrome').id;
-const effectSepiaElement = imageEffectsElement.querySelector('#effect-sepia').id;
-const effectMarvinElement = imageEffectsElement.querySelector('#effect-marvin').id;
-const effectPhobosElement = imageEffectsElement.querySelector('#effect-phobos').id;
-const effectHeatElement = imageEffectsElement.querySelector('#effect-heat').id;
+const effectNoneId = imageEffectsElement.querySelector('#effect-none').id;
+const effectChromeId = imageEffectsElement.querySelector('#effect-chrome').id;
+const effectSepiaId = imageEffectsElement.querySelector('#effect-sepia').id;
+const effectMarvinId = imageEffectsElement.querySelector('#effect-marvin').id;
+const effectPhobosId = imageEffectsElement.querySelector('#effect-phobos').id;
+const effectHeatId = imageEffectsElement.querySelector('#effect-heat').id;
 
 noUiSlider.create(effectLevelSlider, {
   range: {
@@ -59,27 +59,27 @@ const changeEffectsElement = (min, max, step, styleFunction, isDefault) => {
 
 const stylesHandler = (evt) => {
   switch (evt.target.id) {
-    case effectHeatElement: {
+    case effectHeatId: {
       changeEffectsElement(EFFECT_MAX_START_VALUE, EFFECT_VALUE, EFFECT_MIN_STEP_VALUE, (value) => `brightness(${value})`, false);
       break;
     }
-    case effectPhobosElement: {
+    case effectPhobosId: {
       changeEffectsElement(EFFECT_MIN_START_VALUE, EFFECT_VALUE, EFFECT_MIN_STEP_VALUE, (value) => `blur(${value}px)`, false);
       break;
     }
-    case effectMarvinElement: {
+    case effectMarvinId: {
       changeEffectsElement(EFFECT_MIN_START_VALUE, EFFECT_MAX_END_VALUE, EFFECT_MAX_STEP_VALUE, (value) => `invert(${value}%)`, false);
       break;
     }
-    case effectSepiaElement: {
+    case effectSepiaId: {
       changeEffectsElement(EFFECT_MIN_START_VALUE, EFFECT_MIN_END_VALUE, EFFECT_MIN_STEP_VALUE, (value) => `sepia(${value})`, false);
       break;
     }
-    case effectChromeElement: {
+    case effectChromeId: {
       changeEffectsElement(EFFECT_MIN_START_VALUE, EFFECT_MIN_END_VALUE, EFFECT_MIN_STEP_VALUE, (value) => `grayscale(${value})`);
       break;
     }
-    case effectNoneElement: {
+    case effectNoneId: {
       changeEffectsElement(EFFECT_MIN_START_VALUE, ZERO_VALUE, ZERO_VALUE, '', true);
       break;
     }

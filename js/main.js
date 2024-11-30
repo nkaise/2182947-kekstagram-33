@@ -1,10 +1,15 @@
 import '../vendor/pristine/pristine.min.js';
 import '../vendor/nouislider/nouislider.js';
+import {openModalForm,closeUploadingForm} from './modal-opener';
+import {setUploadFormSubmit} from './form-controller';
+import {showDownloadErrorMessage} from './utils';
+import {getData} from './api';
 import {renderPosts} from './miniature-rendering';
-import {similarPosts} from './generate-photo-data';
-import {openModalForm} from './modal-opener';
-import {uploadFormData} from './form-controller';
 
-renderPosts(document.querySelector('.pictures'), similarPosts);
 openModalForm(document.querySelector('.img-upload__input'));
-uploadFormData();
+getData(
+  (picturesContainer, posts) => renderPosts(picturesContainer, posts),
+  () => showDownloadErrorMessage(),
+);
+
+setUploadFormSubmit(closeUploadingForm);

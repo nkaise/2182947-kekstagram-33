@@ -1,10 +1,12 @@
-import {isEscapeKey,stopPropagation} from './utils';
+import {isEscapeKey,stopPropagation,successUploadMessage,errorUploadMessage} from './utils';
 import {MAX_COMMENT_LENGTH} from './photo-data';
 import {VALID_HASHTAG,ERROR_VALIDATION_MESSAGE_COMMENT,ERROR_VALIDATION_MESSAGE_HASHTAG_DEFAULT,ERROR_VALIDATION_MESSAGE_HASHTAG_EXCEEDED,ERROR_VALIDATION_MESSAGE_HASHTAG_DUPLICATE,ZERO_LENGTH,MAX_HASHTAGS_LIST} from './form-controller-data';
+import {sendData} from './api';
 
 const uploadImageForm = document.querySelector('#upload-select-image');
 const hashtagElement = uploadImageForm.querySelector('.text__hashtags');
 const commentFieldElement = uploadImageForm.querySelector('.text__description');
+const submitButtonElement = uploadImageForm.querySelector('#upload-submit');
 let errorValidationMessageHashtag = '';
 
 const pristine = new Pristine(uploadImageForm, {
@@ -12,6 +14,16 @@ const pristine = new Pristine(uploadImageForm, {
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error'
 });
+
+const blockSubmitButton = () => {
+  submitButtonElement.disabled = true;
+  submitButtonElement.textContent = 'Опубликовываю...';
+};
+
+const unBlockSubmitButton = () => {
+  submitButtonElement.disabled = false;
+  submitButtonElement.textContent = 'Опубликовать';
+};
 
 const errorValidationHashtag = () => errorValidationMessageHashtag || ERROR_VALIDATION_MESSAGE_HASHTAG_DEFAULT;
 
@@ -51,14 +63,25 @@ commentFieldElement.addEventListener('keydown', (evt) => {
   }
 });
 
-const uploadFormData = () => {
+const setUploadFormSubmit = () => {
   uploadImageForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
-      uploadImageForm.submit();
+      blockSubmitButton();
+      sendData(
+        () => {
+          successUploadMessage();
+          unBlockSubmitButton();
+        },
+        () => {
+          errorUploadMessage();
+          unBlockSubmitButton();
+        },
+        new FormData(evt.target),
+      );
     }
   });
 };
 
-export {uploadFormData};
+export {setUploadFormSubmit};
