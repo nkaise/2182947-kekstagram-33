@@ -6,7 +6,7 @@ const effectsValue = {
   EFFECT_VALUE: 3,
   EFFECT_MIN_STEP_VALUE: 0.1,
   EFFECT_MAX_STEP_VALUE: 1
-}
+};
 const MIN_RANGE_VALUE = 0;
 const MAX_RANGE_VALUE = 100;
 const START_VALUE = 100;
