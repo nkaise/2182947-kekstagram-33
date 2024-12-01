@@ -1,4 +1,4 @@
-import {MIN_RANGE_VALUE,MAX_RANGE_VALUE,START_VALUE,STEP_RANGE_VALUE,EFFECT_MIN_START_VALUE,EFFECT_MAX_START_VALUE,EFFECT_MAX_END_VALUE,EFFECT_MIN_END_VALUE,EFFECT_VALUE,EFFECT_MIN_STEP_VALUE,EFFECT_MAX_STEP_VALUE,ZERO_VALUE} from './image-effects-data';
+import {MIN_RANGE_VALUE,MAX_RANGE_VALUE,START_VALUE,STEP_RANGE_VALUE,effectsValue,ZERO_VALUE} from './image-effects-data';
 
 const imagePreviewElement = document.querySelector('.img-upload__preview-container');
 const effectLevelValueElement = imagePreviewElement.querySelector('.effect-level__value');
@@ -60,31 +60,31 @@ const changeEffectsElement = (min, max, step, styleFunction, isDefault) => {
 const stylesHandler = (evt) => {
   switch (evt.target.id) {
     case effectHeatId: {
-      changeEffectsElement(EFFECT_MAX_START_VALUE, EFFECT_VALUE, EFFECT_MIN_STEP_VALUE, (value) => `brightness(${value})`, false);
+      changeEffectsElement(effectsValue.EFFECT_MAX_START_VALUE, effectsValue.EFFECT_VALUE, effectsValue.EFFECT_MIN_STEP_VALUE, (value) => `brightness(${value})`, false);
       break;
     }
     case effectPhobosId: {
-      changeEffectsElement(EFFECT_MIN_START_VALUE, EFFECT_VALUE, EFFECT_MIN_STEP_VALUE, (value) => `blur(${value}px)`, false);
+      changeEffectsElement(effectsValue.EFFECT_MIN_START_VALUE, effectsValue.EFFECT_VALUE, effectsValue.EFFECT_MIN_STEP_VALUE, (value) => `blur(${value}px)`, false);
       break;
     }
     case effectMarvinId: {
-      changeEffectsElement(EFFECT_MIN_START_VALUE, EFFECT_MAX_END_VALUE, EFFECT_MAX_STEP_VALUE, (value) => `invert(${value}%)`, false);
+      changeEffectsElement(effectsValue.EFFECT_MIN_START_VALUE, effectsValue.EFFECT_MAX_END_VALUE, effectsValue.EFFECT_MAX_STEP_VALUE, (value) => `invert(${value}%)`, false);
       break;
     }
     case effectSepiaId: {
-      changeEffectsElement(EFFECT_MIN_START_VALUE, EFFECT_MIN_END_VALUE, EFFECT_MIN_STEP_VALUE, (value) => `sepia(${value})`, false);
+      changeEffectsElement(effectsValue.EFFECT_MIN_START_VALUE, effectsValue.EFFECT_MIN_END_VALUE, effectsValue.EFFECT_MIN_STEP_VALUE, (value) => `sepia(${value})`, false);
       break;
     }
     case effectChromeId: {
-      changeEffectsElement(EFFECT_MIN_START_VALUE, EFFECT_MIN_END_VALUE, EFFECT_MIN_STEP_VALUE, (value) => `grayscale(${value})`);
+      changeEffectsElement(effectsValue.EFFECT_MIN_START_VALUE, effectsValue.EFFECT_MIN_END_VALUE, effectsValue.EFFECT_MIN_STEP_VALUE, (value) => `grayscale(${value})`);
       break;
     }
     case effectNoneId: {
-      changeEffectsElement(EFFECT_MIN_START_VALUE, ZERO_VALUE, ZERO_VALUE, '', true);
+      changeEffectsElement(effectsValue.EFFECT_MIN_START_VALUE, ZERO_VALUE, ZERO_VALUE, '', true);
       break;
     }
     default:
-      changeEffectsElement(EFFECT_MIN_START_VALUE, ZERO_VALUE, ZERO_VALUE, '', true);
+      changeEffectsElement(effectsValue.EFFECT_MIN_START_VALUE, ZERO_VALUE, ZERO_VALUE, '', true);
   }
 };
 

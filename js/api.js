@@ -11,7 +11,7 @@ const getData = (onSuccess, onFail) => {
     });
 };
 
-const sendData = (onSuccess, onFail, body) => {
+const sendData = (onSuccess, onFail, onHandlerFinally, body) => {
   fetch(
     `${BASE_URL}${Route.SEND_DATA}`,
     {
@@ -27,6 +27,9 @@ const sendData = (onSuccess, onFail, body) => {
   })
     .catch(() => {
       onFail();
+    })
+    .finally(() => {
+      onHandlerFinally();
     });
 };
 

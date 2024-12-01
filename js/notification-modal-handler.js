@@ -1,4 +1,4 @@
-import {DATA_ERROR_STATUS,SUCCESS_STATUS,ERROR_STATUS,ALERT_SHOW_TIME} from './notification-modal-handler-data';
+import {errorsStatus,ALERT_SHOW_TIME} from './notification-modal-handler-data';
 
 const notificationModalHandler = (status) => {
   const statusMessage = document.querySelector(`.${status}`);
@@ -22,12 +22,12 @@ const messagesHandler = (status) => {
   const textMessage = messageUploadTemplate.cloneNode(true);
   const container = document.body;
   container.append(textMessage);
-  if (status === DATA_ERROR_STATUS) {
+  if (status === errorsStatus.DATA_ERROR_STATUS) {
     setTimeout(() => {
       textMessage.remove();
     }, ALERT_SHOW_TIME);
   }
-  if (status === SUCCESS_STATUS || status === ERROR_STATUS) {
+  if (status === errorsStatus.SUCCESS_STATUS || status === errorsStatus.ERROR_STATUS) {
     notificationModalHandler(status);
   }
 };

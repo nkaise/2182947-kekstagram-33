@@ -1,6 +1,8 @@
-const DATA_ERROR_STATUS = 'data-error';
-const SUCCESS_STATUS = 'success';
-const ERROR_STATUS = 'error';
+const errorsStatus = {
+  DATA_ERROR_STATUS: 'data-error',
+  SUCCESS_STATUS: 'success',
+  ERROR_STATUS: 'error'
+};
 const ALERT_SHOW_TIME = 5000;
 
-export {DATA_ERROR_STATUS,SUCCESS_STATUS,ERROR_STATUS,ALERT_SHOW_TIME};
+export {errorsStatus,ALERT_SHOW_TIME};
