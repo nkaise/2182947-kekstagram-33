@@ -17,16 +17,20 @@ const openUploadingForm = () => {
   effectsListElement.addEventListener('change', stylesHandler);
 };
 
+const resetDataForm = () => {
+  resetScaleValue();
+  uploadImageForm.reset();
+  imageUploadedPreviewElement.removeAttribute('style');
+};
+
 const closeUploadingForm = () => {
   toggleClassName(uploadImageOverlay, 'hidden');
   toggleClassName(document.body, 'modal-open');
   document.removeEventListener('keydown', onCancelUploadEscKeydown);
   cancelUploadButton.removeEventListener('click', closeUploadingForm);
-  removeScaleListeners();
-  resetScaleValue();
-  uploadImageForm.reset();
-  imageUploadedPreviewElement.removeAttribute('style');
   effectsListElement.removeEventListener('change', stylesHandler);
+  removeScaleListeners();
+  resetDataForm();
 };
 
 function onCancelUploadEscKeydown (evt) {

@@ -1,6 +1,6 @@
-import {isEscapeKey,stopPropagation,successUploadMessage,errorUploadMessage} from './utils';
-import {MAX_COMMENT_LENGTH} from './photo-data';
-import {VALID_HASHTAG,ERROR_VALIDATION_MESSAGE_COMMENT,ERROR_VALIDATION_MESSAGE_HASHTAG_DEFAULT,ERROR_VALIDATION_MESSAGE_HASHTAG_EXCEEDED,ERROR_VALIDATION_MESSAGE_HASHTAG_DUPLICATE,ZERO_LENGTH,MAX_HASHTAGS_LIST} from './form-controller-data';
+import {isEscapeKey,stopPropagation} from './utils';
+import {messagesHandler} from './notification-modal-handler';
+import {VALID_HASHTAG,ERROR_VALIDATION_MESSAGE_COMMENT,ERROR_VALIDATION_MESSAGE_HASHTAG_DEFAULT,ERROR_VALIDATION_MESSAGE_HASHTAG_EXCEEDED,ERROR_VALIDATION_MESSAGE_HASHTAG_DUPLICATE,ZERO_LENGTH,MAX_HASHTAGS_LIST,SubmitButtonText,MAX_COMMENT_LENGTH} from './form-controller-data';
 import {sendData} from './api';
 
 const uploadImageForm = document.querySelector('#upload-select-image');
@@ -17,12 +17,12 @@ const pristine = new Pristine(uploadImageForm, {
 
 const blockSubmitButton = () => {
   submitButtonElement.disabled = true;
-  submitButtonElement.textContent = 'Опубликовываю...';
+  submitButtonElement.textContent = `${SubmitButtonText.SENDING}`;
 };
 
 const unBlockSubmitButton = () => {
   submitButtonElement.disabled = false;
-  submitButtonElement.textContent = 'Опубликовать';
+  submitButtonElement.textContent = `${SubmitButtonText.IDLE}`;
 };
 
 const errorValidationHashtag = () => errorValidationMessageHashtag || ERROR_VALIDATION_MESSAGE_HASHTAG_DEFAULT;
@@ -63,7 +63,7 @@ commentFieldElement.addEventListener('keydown', (evt) => {
   }
 });
 
-const setUploadFormSubmit = () => {
+const setUploadFormSubmit = (closeForm) => {
   uploadImageForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
@@ -71,11 +71,12 @@ const setUploadFormSubmit = () => {
       blockSubmitButton();
       sendData(
         () => {
-          successUploadMessage();
+          messagesHandler('success');
+          closeForm();
           unBlockSubmitButton();
         },
         () => {
-          errorUploadMessage();
+          messagesHandler('error');
           unBlockSubmitButton();
         },
         new FormData(evt.target),

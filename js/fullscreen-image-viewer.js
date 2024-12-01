@@ -1,5 +1,5 @@
 import {clearInnerElements, isEscapeKey, toggleClassName} from './utils';
-import {COMMENTS_COUNT_STEP} from './photo-data';
+import {COMMENTS_COUNT_STEP} from './fullscreen-image-viewer-data';
 
 const similarCommentFragment = document.createDocumentFragment();
 const bigPictureContainer = document.querySelector('.big-picture');

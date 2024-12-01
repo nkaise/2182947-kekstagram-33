@@ -1,5 +1,7 @@
+import {BASE_URL,Route} from './api-data';
+
 const getData = (onSuccess, onFail) => {
-  fetch('https://32.javascript.htmlacademy.pro/kekstagram/data')
+  fetch(`${BASE_URL}${Route.GET_DATA}`)
     .then((response) => response.json())
     .then((posts) => {
       onSuccess(document.querySelector('.pictures'), posts);
@@ -11,7 +13,7 @@ const getData = (onSuccess, onFail) => {
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://32.javascript.htmlacademy.pro/kekstagram',
+    `${BASE_URL}${Route.SEND_DATA}`,
     {
       method: 'POST',
       body,

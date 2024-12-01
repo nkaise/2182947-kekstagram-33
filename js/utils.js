@@ -30,28 +30,4 @@ const stopPropagation = (evt) => {
   evt.preventDefault();
 };
 
-const showDownloadErrorMessage = () => {
-  const downloadErrorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
-  const errorMessage = downloadErrorTemplate.cloneNode(true);
-  const container = document.body;
-  container.append(errorMessage);
-  setTimeout(() => {
-    errorMessage.remove();
-  }, 5000);
-};
-
-const successUploadMessage = () => {
-  const successUploadTemplate = document.querySelector('#success').content.querySelector('.success');
-  const successMessage = successUploadTemplate.cloneNode(true);
-  const container = document.body;
-  container.append(successMessage);
-};
-
-const errorUploadMessage = () => {
-  const errorUploadTemplate = document.querySelector('#error').content.querySelector('.error');
-  const errorMessage = errorUploadTemplate.cloneNode(true);
-  const container = document.body;
-  container.append(errorMessage);
-};
-
-export {getRandomInteger, getRandomArrayElement, getUniqueValue, clearInnerElements, isEscapeKey, toggleClassName, stopPropagation,showDownloadErrorMessage,successUploadMessage,errorUploadMessage};
+export {getRandomInteger, getRandomArrayElement, getUniqueValue, clearInnerElements, isEscapeKey, toggleClassName, stopPropagation};
