@@ -25,15 +25,21 @@ const zoomInImage = () => {
   changeScaleValue();
 };
 
-const openScaleImage = () => {
+const resetScaleValue = () => {
+  changingScaleValue = MAX_IMAGE_SCALE;
+  changeScaleValue();
+  scaleValueElement.setAttribute('value', `${MAX_IMAGE_SCALE}%`);
+};
+
+const handleScaleListeners = () => {
   imageScaleSmallerElement.addEventListener('click', zoomOutImage);
   imageScaleBiggerElement.addEventListener('click', zoomInImage);
 };
 
-const closeScaleImage = () => {
+const removeScaleListeners = () => {
   imageScaleSmallerElement.removeEventListener('click', zoomOutImage);
   imageScaleBiggerElement.removeEventListener('click', zoomInImage);
 };
 
-export {openScaleImage,closeScaleImage};
+export {handleScaleListeners,removeScaleListeners,resetScaleValue};
 
