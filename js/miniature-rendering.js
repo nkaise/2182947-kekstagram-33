@@ -1,8 +1,15 @@
 import {renderBigPicture} from './fullscreen-image-viewer';
+import {filterPosts} from './posts-filter';
 
+const filterElement = document.querySelector('.img-filters__form');
 const similarPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const similarPhotoFragment = document.createDocumentFragment();
 
+const registerFilterElementEvent = (dataForPosts) => {
+  filterElement.addEventListener('click', (evt) => {
+    filterPosts(evt, dataForPosts);
+  });
+};
 const renderPosts = (container, dataForPosts) => {
   dataForPosts.forEach(({url, description, likes, comments}) => {
     const photoElement = similarPhotoTemplate.cloneNode(true);
@@ -19,4 +26,4 @@ const renderPosts = (container, dataForPosts) => {
   container.append(similarPhotoFragment);
 };
 
-export {renderPosts};
+export {renderPosts,registerFilterElementEvent};

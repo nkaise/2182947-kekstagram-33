@@ -1,21 +1,21 @@
-import {BASE_URL,Route} from './api-data';
+import {BASE_URL,Route,METHOD_POST} from './api-data';
 
 const getData = (onSuccess, onFail) => {
   fetch(`${BASE_URL}${Route.GET_DATA}`)
     .then((response) => response.json())
     .then((posts) => {
-      onSuccess(document.querySelector('.pictures'), posts);
+      onSuccess(posts);
     })
     .catch(() => {
       onFail();
     });
 };
 
-const sendData = (onSuccess, onFail, onHandlerFinally, body) => {
+const sendData = ({onSuccess, onFail, onHandlerFinally, body}) => {
   fetch(
     `${BASE_URL}${Route.SEND_DATA}`,
     {
-      method: 'POST',
+      method: METHOD_POST,
       body,
     },
   ).then((response) => {

@@ -69,19 +69,20 @@ const setUploadFormSubmit = (closeForm) => {
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
-      sendData(
-        () => {
+      const formData = new FormData(evt.target);
+      sendData({
+        onSuccess: () => {
           messagesHandler('success');
           closeForm();
         },
-        () => {
+        onFail: () => {
           messagesHandler('error');
         },
-        () => {
+        onHandlerFinally: () => {
           unBlockSubmitButton();
         },
-        new FormData(evt.target),
-      );
+        body: formData
+      });
     }
   });
 };
