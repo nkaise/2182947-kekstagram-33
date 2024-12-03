@@ -14,26 +14,22 @@ const getData = async (onSuccess, onFail) => {
   }
 };
 
-const sendData = ({onSuccess, onFail, onHandlerFinally, body}) => {
-  fetch(
-    `${BASE_URL}${Route.SEND_DATA}`,
-    {
+const sendData = async ({onSuccess, onFail, onHandlerFinally, body}) => {
+  try {
+    const response = await fetch(`${BASE_URL}${Route.SEND_DATA}`, {
       method: METHOD_POST,
       body,
-    },
-  ).then((response) => {
-    if (response.ok) {
-      onSuccess();
-    } else {
-      onFail();
-    }
-  })
-    .catch(() => {
-      onFail();
-    })
-    .finally(() => {
-      onHandlerFinally();
     });
+    if (!response.ok) {
+      onFail();
+    } else {
+      onSuccess();
+    }
+  } catch (error) {
+    onFail();
+  } finally {
+    onHandlerFinally();
+  }
 };
 
 export {getData,sendData};

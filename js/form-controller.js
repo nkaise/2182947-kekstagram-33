@@ -64,13 +64,13 @@ commentFieldElement.addEventListener('keydown', (evt) => {
 });
 
 const setUploadFormSubmit = (closeForm) => {
-  uploadImageForm.addEventListener('submit', (evt) => {
+  uploadImageForm.addEventListener('submit', async (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
       const formData = new FormData(evt.target);
-      sendData({
+      await sendData({
         onSuccess: () => {
           messagesHandler('success');
           closeForm();

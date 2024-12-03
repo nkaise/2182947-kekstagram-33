@@ -18,5 +18,4 @@ await getData(
   () => messagesHandler('data-error')
 );
 
-
 setUploadFormSubmit(closeUploadingForm);
