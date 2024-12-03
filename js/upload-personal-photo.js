@@ -12,7 +12,9 @@ const fileUploadingForm = () => {
     if (matches) {
       const imageUrl = URL.createObjectURL(file);
       preview.src = imageUrl;
-      effectPreview.forEach((photoPreview) => photoPreview.style.backgroundImage = `url("${imageUrl}")`);
+      effectPreview.forEach((photoPreview) => {
+        photoPreview.style.backgroundImage = `url("${imageUrl}")`;
+      });
     }
   });
 };
