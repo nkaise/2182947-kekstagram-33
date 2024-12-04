@@ -5,7 +5,6 @@ const defaultFilterElement = filterElement.querySelector('#filter-default');
 const randomFilterElement = filterElement.querySelector('#filter-random');
 const filterDiscussedElement = filterElement.querySelector('#filter-discussed');
 
-filterElement.classList.remove('img-filters--inactive');
 const changeFilters = (currentFilter) => {
   const activeButton = filterElement.querySelector('.img-filters__button--active');
   if (activeButton) {
