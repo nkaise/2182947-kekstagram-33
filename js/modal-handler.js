@@ -23,6 +23,13 @@ const resetDataForm = () => {
   imageUploadedPreviewElement.removeAttribute('style');
 };
 
+const removeErrorPristineElements = () => {
+  const errorPristineElements = uploadImageForm.querySelectorAll('.pristine-error');
+  errorPristineElements.forEach((error) => {
+    error.remove();
+  });
+};
+
 const closeUploadingForm = () => {
   toggleClassName(uploadImageOverlay, 'hidden');
   toggleClassName(document.body, 'modal-open');
@@ -31,6 +38,7 @@ const closeUploadingForm = () => {
   effectsListElement.removeEventListener('change', stylesHandler);
   removeScaleListeners();
   resetDataForm();
+  removeErrorPristineElements();
 };
 
 function onCancelUploadEscKeydown (evt) {

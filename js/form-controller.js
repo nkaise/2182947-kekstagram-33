@@ -64,24 +64,25 @@ commentFieldElement.addEventListener('keydown', (evt) => {
 });
 
 const setUploadFormSubmit = (closeForm) => {
-  uploadImageForm.addEventListener('submit', (evt) => {
+  uploadImageForm.addEventListener('submit', async (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
-      sendData(
-        () => {
+      const formData = new FormData(evt.target);
+      await sendData({
+        onSuccess: () => {
           messagesHandler('success');
           closeForm();
         },
-        () => {
+        onFail: () => {
           messagesHandler('error');
         },
-        () => {
+        onHandlerFinally: () => {
           unBlockSubmitButton();
         },
-        new FormData(evt.target),
-      );
+        body: formData
+      });
     }
   });
 };

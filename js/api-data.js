@@ -4,4 +4,9 @@ const Route = {
   SEND_DATA: '/',
 };
 
-export {BASE_URL,Route};
+const Methods = {
+  POST: 'POST',
+  GET: 'GET'
+};
+
+export {BASE_URL,Route,Methods};

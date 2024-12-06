@@ -34,6 +34,7 @@ function closeBigPicture (pictureContainer, commentsContainer) {
 const createPostComments = (comment) => {
   const commentElement = socialCommentElement.cloneNode(true);
   commentElement.querySelector('.social__picture').src = comment.avatar;
+  commentElement.querySelector('.social__picture').alt = comment.name;
   commentElement.querySelector('.social__text').alt = comment.name;
   commentElement.querySelector('.social__text').textContent = comment.message;
   similarCommentFragment.append(commentElement);

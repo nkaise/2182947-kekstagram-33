@@ -1,36 +1,39 @@
-import {BASE_URL,Route} from './api-data';
+import {BASE_URL,Route,Methods} from './api-data';
 
-const getData = (onSuccess, onFail) => {
-  fetch(`${BASE_URL}${Route.GET_DATA}`)
-    .then((response) => response.json())
-    .then((posts) => {
-      onSuccess(document.querySelector('.pictures'), posts);
-    })
-    .catch(() => {
+const getData = async (onSuccess, onFail) => {
+  try {
+    const response = await fetch(`${BASE_URL}${Route.GET_DATA}`);
+    if (!response.ok) {
       onFail();
-    });
+      return;
+    }
+    if (response.ok) {
+      const posts = await response.json();
+      onSuccess(posts);
+    }
+  } catch (error) {
+    onFail();
+  }
 };
 
-const sendData = (onSuccess, onFail, onHandlerFinally, body) => {
-  fetch(
-    `${BASE_URL}${Route.SEND_DATA}`,
-    {
-      method: 'POST',
+const sendData = async ({onSuccess, onFail, onHandlerFinally, body}) => {
+  try {
+    const response = await fetch(`${BASE_URL}${Route.SEND_DATA}`, {
+      method: Methods.POST,
       body,
-    },
-  ).then((response) => {
+    });
+    if (!response.ok) {
+      onFail();
+      return;
+    }
     if (response.ok) {
       onSuccess();
-    } else {
-      onFail();
     }
-  })
-    .catch(() => {
-      onFail();
-    })
-    .finally(() => {
-      onHandlerFinally();
-    });
+  } catch (error) {
+    onFail();
+  } finally {
+    onHandlerFinally();
+  }
 };
 
 export {getData,sendData};
