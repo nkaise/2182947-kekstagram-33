@@ -1,4 +1,4 @@
-import {BASE_URL,Route,METHOD_POST} from './api-data';
+import {BASE_URL,Route,Methods} from './api-data';
 
 const getData = async (onSuccess, onFail) => {
   try {
@@ -19,7 +19,7 @@ const getData = async (onSuccess, onFail) => {
 const sendData = async ({onSuccess, onFail, onHandlerFinally, body}) => {
   try {
     const response = await fetch(`${BASE_URL}${Route.SEND_DATA}`, {
-      method: METHOD_POST,
+      method: Methods.POST,
       body,
     });
     if (!response.ok) {

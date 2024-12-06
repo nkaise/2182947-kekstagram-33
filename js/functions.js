@@ -15,9 +15,9 @@ isPalindrome('ДовОд');
 
 const extractNumberFromString = (string) => {
   let number = '';
-  const numberList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const numbersList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   for (let i = 0; i < string.length; i++) {
-    if (string[i] in numberList) {
+    if (string[i] in numbersList) {
       number += string[i].toString();
     }
   }

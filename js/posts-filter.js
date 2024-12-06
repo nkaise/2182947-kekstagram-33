@@ -17,18 +17,21 @@ const changeFilters = (currentFilter) => {
 
 const filterPosts = (evt, posts) => {
   const initialPostsList = posts;
+  const picturesContainerElement = document.querySelector('.pictures');
   if (evt.target.closest(`#${randomFilterElement.id}`)) {
     changeFilters(randomFilterElement);
     const randomPosts = posts.toSorted(() => Math.random() - 0.5);
-    renderPosts(document.querySelector('.pictures'), randomPosts.slice(0,10));
+    renderPosts(picturesContainerElement, randomPosts.slice(0,10));
+    return;
   }
   if (evt.target.closest(`#${defaultFilterElement.id}`)) {
     changeFilters(defaultFilterElement);
-    renderPosts(document.querySelector('.pictures'), initialPostsList);
+    renderPosts(picturesContainerElement, initialPostsList);
+    return;
   }
   if (evt.target.closest(`#${filterDiscussedElement.id}`)) {
     changeFilters(filterDiscussedElement);
-    renderPosts(document.querySelector('.pictures'), posts.toSorted((a, b) => b.comments.length - a.comments.length));
+    renderPosts(picturesContainerElement, posts.toSorted((a, b) => b.comments.length - a.comments.length));
   }
 };
 

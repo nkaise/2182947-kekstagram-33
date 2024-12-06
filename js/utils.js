@@ -1,3 +1,5 @@
+import {RERENDER_DELAY} from './miniature-rendering-data';
+
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -30,7 +32,7 @@ const stopPropagation = (evt) => {
   evt.preventDefault();
 };
 
-function debounce (callback, timeoutDelay = 500) {
+function debounce (callback, timeoutDelay = RERENDER_DELAY) {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
