@@ -1,4 +1,4 @@
-const errorsMessage = {
+const ErrorMessage = {
   ERROR_VALIDATION_MESSAGE_COMMENT: 'Длина комментария больше 140 символов',
   ERROR_VALIDATION_MESSAGE_HASHTAG_DEFAULT: 'Введён невалидный хэштег',
   ERROR_VALIDATION_MESSAGE_HASHTAG_EXCEEDED: 'Превышено количество хэштегов',
@@ -13,4 +13,4 @@ const SubmitButtonText = {
   SENDING: 'Опубликовываю...'
 };
 
-export {errorsMessage,VALID_HASHTAG,ZERO_LENGTH,MAX_HASHTAGS_LIST,SubmitButtonText,MAX_COMMENT_LENGTH};
+export {ErrorMessage,VALID_HASHTAG,ZERO_LENGTH,MAX_HASHTAGS_LIST,SubmitButtonText,MAX_COMMENT_LENGTH};

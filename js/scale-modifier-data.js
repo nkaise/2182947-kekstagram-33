@@ -1,5 +1,7 @@
-const MAX_IMAGE_SCALE = 100;
-const MIN_IMAGE_SCALE = 25;
+const ImageScale = {
+  MIN: 25,
+  MAX: 100
+};
 const NUMERAL_SYSTEM = 10;
 
-export {MAX_IMAGE_SCALE,MIN_IMAGE_SCALE,NUMERAL_SYSTEM};
+export {ImageScale,NUMERAL_SYSTEM};
