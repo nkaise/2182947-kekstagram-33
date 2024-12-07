@@ -4,6 +4,10 @@ const ErrorMessage = {
   ERROR_VALIDATION_MESSAGE_HASHTAG_EXCEEDED: 'Превышено количество хэштегов',
   ERROR_VALIDATION_MESSAGE_HASHTAG_DUPLICATE: 'Хэштеги повторяются'
 };
+const StatusOption = {
+  SUCCESS_STATUS: 'success',
+  ERROR_STATUS: 'error'
+};
 const VALID_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
 const ZERO_LENGTH = 0;
 const MAX_HASHTAGS_LIST = 5;
@@ -13,4 +17,4 @@ const SubmitButtonText = {
   SENDING: 'Опубликовываю...'
 };
 
-export {ErrorMessage,VALID_HASHTAG,ZERO_LENGTH,MAX_HASHTAGS_LIST,SubmitButtonText,MAX_COMMENT_LENGTH};
+export {ErrorMessage,StatusOption,VALID_HASHTAG,ZERO_LENGTH,MAX_HASHTAGS_LIST,SubmitButtonText,MAX_COMMENT_LENGTH};

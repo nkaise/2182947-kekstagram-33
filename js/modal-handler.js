@@ -1,7 +1,7 @@
 import {isEscapeKey, toggleClassName} from './utils';
 import {handleScaleListeners,removeScaleListeners,resetScaleValue} from './scale-modifier';
 import {stylesHandler} from './image-effects';
-import {pristine} from "./form-controller";
+import {pristine} from './form-controller';
 
 const uploadImageFormElement = document.querySelector('#upload-select-image');
 const uploadImageOverlayElement = uploadImageFormElement.querySelector('.img-upload__overlay');
@@ -18,17 +18,19 @@ const openUploadForm = () => {
   effectsListElement.addEventListener('change', stylesHandler);
 };
 
-const resetDataForm = () => {
-  resetScaleValue();
-  uploadImageFormElement.reset();
-  imageUploadedPreviewElement.removeAttribute('style');
-};
-
 const removeErrorPristineElements = () => {
   const errorPristineElements = uploadImageFormElement.querySelectorAll('.pristine-error');
   errorPristineElements.forEach((error) => {
     error.remove();
   });
+};
+
+const resetDataForm = () => {
+  resetScaleValue();
+  uploadImageFormElement.reset();
+  imageUploadedPreviewElement.removeAttribute('style');
+  removeErrorPristineElements();
+  pristine.reset();
 };
 
 const closeUploadForm = () => {
@@ -39,8 +41,6 @@ const closeUploadForm = () => {
   document.removeEventListener('keydown', onCancelUploadEscKeydown);
   removeScaleListeners();
   resetDataForm();
-  removeErrorPristineElements();
-  pristine.reset();
 };
 
 function onCancelUploadEscKeydown (evt) {

@@ -1,7 +1,7 @@
 import {isEscapeKey,stopPropagation} from './utils';
 import {messagesHandler} from './notification-modal-handler';
 import {sendData} from './api';
-import {VALID_HASHTAG,ErrorMessage,ZERO_LENGTH,MAX_HASHTAGS_LIST,SubmitButtonText,MAX_COMMENT_LENGTH} from './form-controller-data';
+import {VALID_HASHTAG,ErrorMessage,StatusOption,ZERO_LENGTH,MAX_HASHTAGS_LIST,SubmitButtonText,MAX_COMMENT_LENGTH} from './form-controller-data';
 
 const uploadImageFormElement = document.querySelector('#upload-select-image');
 const hashtagElement = uploadImageFormElement.querySelector('.text__hashtags');
@@ -72,11 +72,11 @@ const setUploadFormSubmit = (closeForm) => {
       const formData = new FormData(evt.target);
       await sendData({
         onSuccess: () => {
-          messagesHandler('success');
+          messagesHandler(StatusOption.SUCCESS_STATUS);
           closeForm();
         },
         onFail: () => {
-          messagesHandler('error');
+          messagesHandler(StatusOption.ERROR_STATUS);
         },
         onHandlerFinally: () => {
           unBlockSubmitButton();
