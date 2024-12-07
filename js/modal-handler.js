@@ -45,9 +45,8 @@ const closeUploadForm = () => {
 
 function onCancelUploadEscKeydown (evt) {
   if (isEscapeKey(evt)) {
-    if (!evt.target.querySelector('section.error')) {
-      closeUploadForm();
-    }
+    evt.preventDefault();
+    closeUploadForm();
   }
 }
 

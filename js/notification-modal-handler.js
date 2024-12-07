@@ -6,11 +6,11 @@ const notificationModalHandler = (status) => {
   statusButtonElement.addEventListener('click', () => {
     statusMessage.remove();
   });
-  document.body.addEventListener('keydown', (evt) => {
+  document.addEventListener('keydown', (evt) => {
     evt.stopPropagation();
     statusMessage.remove();
   });
-  document.body.addEventListener('click', (evt) => {
+  document.addEventListener('click', (evt) => {
     if (!evt.target.closest(`.${status}__inner`)) {
       statusMessage.remove();
     }
