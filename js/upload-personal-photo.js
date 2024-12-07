@@ -1,10 +1,10 @@
-const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+import {FILE_TYPES} from './upload-personal-photo-data';
 
 const fileChooserElement = document.querySelector('#upload-file');
 const previewElement = document.querySelector('.img-upload__preview img');
 const effectPreviewElement = document.querySelectorAll('.effects__preview');
 
-const fileUploadingForm = () => {
+const fileUploadForm = () => {
   fileChooserElement.addEventListener('change', () => {
     const file = fileChooserElement.files[0];
     const fileName = file.name.toLowerCase();
@@ -19,4 +19,4 @@ const fileUploadingForm = () => {
   });
 };
 
-export {fileUploadingForm};
+export {fileUploadForm};
