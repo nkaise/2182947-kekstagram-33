@@ -9,7 +9,7 @@ const effectLevelSliderContainerElement = uploadImageFormElement.querySelector('
 const effectsListElement = uploadImageFormElement.querySelector('.effects__list');
 const imageUploadedPreviewElement = uploadImageFormElement.querySelector('.img-upload__preview img');
 
-const openUploadingForm = () => {
+const openUploadForm = () => {
   toggleClassName(uploadImageOverlayElement, 'hidden');
   toggleClassName(document.body, 'modal-open');
   handleScaleListeners();
@@ -26,15 +26,16 @@ const resetDataForm = () => {
 const closeUploadForm = () => {
   toggleClassName(uploadImageOverlayElement, 'hidden');
   toggleClassName(document.body, 'modal-open');
-  document.removeEventListener('keydown', onCancelUploadEscKeydown);
   cancelUploadButtonElement.removeEventListener('click', closeUploadForm);
   effectsListElement.removeEventListener('change', stylesHandler);
+  document.removeEventListener('keydown', onCancelUploadEscKeydown);
   removeScaleListeners();
   resetDataForm();
 };
 
 function onCancelUploadEscKeydown (evt) {
   if (isEscapeKey(evt)) {
+    evt.preventDefault();
     closeUploadForm();
   }
 }
@@ -42,7 +43,7 @@ function onCancelUploadEscKeydown (evt) {
 const openModalForm = (element) => {
   element.addEventListener('change', (evt) => {
     evt.preventDefault();
-    openUploadingForm();
+    openUploadForm();
     cancelUploadButtonElement.addEventListener('click', closeUploadForm);
     document.addEventListener('keydown', onCancelUploadEscKeydown);
   });
