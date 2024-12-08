@@ -1,34 +1,34 @@
-import {MAX_IMAGE_SCALE,MIN_IMAGE_SCALE,NUMERAL_SYSTEM} from './scale-modifier-data';
+import {ImageScale,NUMERAL_SYSTEM} from './scale-modifier-data';
 
-const imageUploadPreviewContainer = document.querySelector('.img-upload__preview-container');
-const imageScaleSmallerElement = imageUploadPreviewContainer.querySelector('.scale__control--smaller');
-const imageScaleBiggerElement = imageUploadPreviewContainer.querySelector('.scale__control--bigger');
-const imagePreviewElement = imageUploadPreviewContainer.querySelector('.img-upload__preview img');
-const scaleValueElement = imageUploadPreviewContainer.querySelector('.scale__control--value');
+const imageUploadPreviewContainerElement = document.querySelector('.img-upload__preview-container');
+const imageScaleSmallerElement = imageUploadPreviewContainerElement.querySelector('.scale__control--smaller');
+const imageScaleBiggerElement = imageUploadPreviewContainerElement.querySelector('.scale__control--bigger');
+const imagePreviewElement = imageUploadPreviewContainerElement.querySelector('.img-upload__preview img');
+const scaleValueElement = imageUploadPreviewContainerElement.querySelector('.scale__control--value');
 let changingScaleValue = scaleValueElement.value;
 
 const changeScaleValue = () => {
-  const updatedScaleValue = changingScaleValue / MAX_IMAGE_SCALE;
+  const updatedScaleValue = changingScaleValue / ImageScale.MAX;
   imagePreviewElement.style.transform = `scale(${updatedScaleValue})`;
   scaleValueElement.setAttribute('value', `${changingScaleValue}%`);
 };
 
 const zoomOutImage = () => {
-  changingScaleValue = parseInt(changingScaleValue, NUMERAL_SYSTEM) - MIN_IMAGE_SCALE;
-  changingScaleValue = Math.max(changingScaleValue, MIN_IMAGE_SCALE);
+  changingScaleValue = parseInt(changingScaleValue, NUMERAL_SYSTEM) - ImageScale.MIN;
+  changingScaleValue = Math.max(changingScaleValue, ImageScale.MIN);
   changeScaleValue();
 };
 
 const zoomInImage = () => {
-  changingScaleValue = parseInt(changingScaleValue, NUMERAL_SYSTEM) + MIN_IMAGE_SCALE;
-  changingScaleValue = Math.min(changingScaleValue, MAX_IMAGE_SCALE);
+  changingScaleValue = parseInt(changingScaleValue, NUMERAL_SYSTEM) + ImageScale.MIN;
+  changingScaleValue = Math.min(changingScaleValue, ImageScale.MAX);
   changeScaleValue();
 };
 
 const resetScaleValue = () => {
-  changingScaleValue = MAX_IMAGE_SCALE;
+  changingScaleValue = ImageScale.MAX;
   changeScaleValue();
-  scaleValueElement.setAttribute('value', `${MAX_IMAGE_SCALE}%`);
+  scaleValueElement.setAttribute('value', `${ImageScale.MAX}%`);
 };
 
 const handleScaleListeners = () => {

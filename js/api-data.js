@@ -3,10 +3,9 @@ const Route = {
   GET_DATA: '/data',
   SEND_DATA: '/',
 };
-
-const Methods = {
+const Method = {
   POST: 'POST',
   GET: 'GET'
 };
 
-export {BASE_URL,Route,Methods};
+export {BASE_URL,Route,Method};
