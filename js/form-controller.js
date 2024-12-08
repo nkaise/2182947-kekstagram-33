@@ -15,14 +15,14 @@ const pristine = new Pristine(uploadImageForm, {
   errorTextClass: 'img-upload__field-wrapper--error'
 });
 
-const blockSubmitButton = () => {
-  submitButtonElement.disabled = true;
-  submitButtonElement.textContent = `${SubmitButtonText.SENDING}`;
-};
-
-const unBlockSubmitButton = () => {
-  submitButtonElement.disabled = false;
-  submitButtonElement.textContent = `${SubmitButtonText.IDLE}`;
+const toggleDisableSubmitButton = (isDisabled) => {
+  if (isDisabled) {
+    submitButtonElement.disabled = true;
+    submitButtonElement.textContent = `${SubmitButtonText.SENDING}`;
+  } else {
+    submitButtonElement.disabled = false;
+    submitButtonElement.textContent = `${SubmitButtonText.IDLE}`;
+  }
 };
 
 const errorValidationHashtag = () => errorValidationMessageHashtag || errorsMessage.ERROR_VALIDATION_MESSAGE_HASHTAG_DEFAULT;
@@ -68,7 +68,7 @@ const setUploadFormSubmit = (closeForm) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
-      blockSubmitButton();
+      toggleDisableSubmitButton(true);
       const formData = new FormData(evt.target);
       await sendData({
         onSuccess: () => {
@@ -79,7 +79,7 @@ const setUploadFormSubmit = (closeForm) => {
           messagesHandler('error');
         },
         onHandlerFinally: () => {
-          unBlockSubmitButton();
+          toggleDisableSubmitButton(false);
         },
         body: formData
       });
