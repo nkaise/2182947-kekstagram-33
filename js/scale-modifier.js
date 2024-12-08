@@ -42,4 +42,3 @@ const removeScaleListeners = () => {
 };
 
 export {handleScaleListeners,removeScaleListeners,resetScaleValue};
-

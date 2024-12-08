@@ -1,4 +1,4 @@
-import {clearInnerElements, isEscapeKey, toggleClassName} from './utils';
+import {clearInnerElements,isEscapeKey,toggleClassName} from './utils';
 import {COMMENT_COUNT_STEP} from './fullscreen-image-viewer-data';
 
 const similarCommentFragment = document.createDocumentFragment();

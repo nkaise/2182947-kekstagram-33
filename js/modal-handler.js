@@ -1,4 +1,4 @@
-import {isEscapeKey, toggleClassName} from './utils';
+import {isEscapeKey,toggleClassName} from './utils';
 import {handleScaleListeners,removeScaleListeners,resetScaleValue} from './scale-modifier';
 import {stylesHandler} from './image-effects';
 import {pristine} from './form-controller';

@@ -23,4 +23,4 @@ function debounce (callback, timeoutDelay = RERENDER_DELAY) {
   };
 }
 
-export {clearInnerElements, isEscapeKey, toggleClassName, stopPropagation, debounce};
+export {clearInnerElements,isEscapeKey,toggleClassName,stopPropagation,debounce};
