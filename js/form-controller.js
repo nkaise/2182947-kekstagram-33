@@ -1,6 +1,7 @@
 import {isEscapeKey,stopPropagation} from './utils';
 import {sendData} from './api';
 import {VALID_HASHTAG,ErrorMessage,StatusOption,ZERO_LENGTH,MAX_HASHTAGS_LIST,SubmitButtonText,MAX_COMMENT_LENGTH} from './form-controller-data';
+import {showStatusMessage} from './notification-modal-handler';
 
 const uploadImageFormElement = document.querySelector('#upload-select-image');
 const hashtagElement = uploadImageFormElement.querySelector('.text__hashtags');
@@ -61,7 +62,7 @@ commentFieldElement.addEventListener('keydown', (evt) => {
     stopPropagation(evt);
   }
 });
-import {showStatusMessage} from './notification-modal-handler';
+
 const setUploadFormSubmit = (closeForm) => {
   uploadImageFormElement.addEventListener('submit', async (evt) => {
     evt.preventDefault();
