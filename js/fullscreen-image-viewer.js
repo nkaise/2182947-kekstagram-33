@@ -28,7 +28,7 @@ function closeBigPicture (pictureContainer, commentsContainer) {
   clearInnerElements(commentsContainer);
   toggleClassName(document.body, 'modal-open');
   document.removeEventListener('keydown', onBigPictureEscKeydown);
-  commentLoaderElement.removeEventListener('click', loadMoreComments);
+  commentLoaderElement.removeEventListener('click', onCommentsLoad);
 }
 
 const createPostComments = (comment) => {
@@ -55,12 +55,12 @@ const renderPostComments = () => {
   }
   socialCommentContainerElement.append(similarCommentFragment);
   shownCommentElement.textContent = shownComment;
-  if (currentComments.length > 5) {
-    commentLoaderElement.addEventListener('click', loadMoreComments);
+  if (currentComments.length > COMMENT_COUNT_STEP) {
+    commentLoaderElement.addEventListener('click', onCommentsLoad);
   }
 };
 
-function loadMoreComments() {
+function onCommentsLoad () {
   shownComment += COMMENT_COUNT_STEP;
   renderPostComments();
 }

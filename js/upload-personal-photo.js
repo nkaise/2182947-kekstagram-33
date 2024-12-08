@@ -2,7 +2,7 @@ import {FILE_TYPES} from './upload-personal-photo-data';
 
 const fileChooserElement = document.querySelector('#upload-file');
 const previewElement = document.querySelector('.img-upload__preview img');
-const effectPreviewElement = document.querySelectorAll('.effects__preview');
+const effectsPreviewElement = document.querySelectorAll('.effects__preview');
 
 const fileUploadForm = () => {
   fileChooserElement.addEventListener('change', () => {
@@ -12,7 +12,7 @@ const fileUploadForm = () => {
     if (matches) {
       const imageUrl = URL.createObjectURL(file);
       previewElement.src = imageUrl;
-      effectPreviewElement.forEach((photoPreview) => {
+      effectsPreviewElement.forEach((photoPreview) => {
         photoPreview.style.backgroundImage = `url("${imageUrl}")`;
       });
     }

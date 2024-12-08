@@ -1,6 +1,6 @@
 import {isEscapeKey,toggleClassName} from './utils';
 import {handleScaleListeners,removeScaleListeners,resetScaleValue} from './scale-modifier';
-import {stylesHandler} from './image-effects';
+import {onImageEffectChange} from './image-effects';
 import {pristine} from './form-controller';
 import {closeKeyDownErrorStatusMessage} from './notification-modal-handler';
 import {StatusOption} from './notification-modal-handler-data';
@@ -18,7 +18,7 @@ const openUploadForm = () => {
   toggleClassName(document.body, 'modal-open');
   handleScaleListeners();
   effectLevelSliderContainerElement.classList.add('hidden');
-  effectsListElement.addEventListener('change', stylesHandler);
+  effectsListElement.addEventListener('change', onImageEffectChange);
 };
 
 const removeErrorPristineElements = () => {
@@ -36,11 +36,11 @@ const resetDataForm = () => {
   pristine.reset();
 };
 
-const closeUploadForm = () => {
+const onUploadFormClose = () => {
   toggleClassName(uploadImageOverlayElement, 'hidden');
   toggleClassName(document.body, 'modal-open');
-  cancelUploadButtonElement.removeEventListener('click', closeUploadForm);
-  effectsListElement.removeEventListener('change', stylesHandler);
+  cancelUploadButtonElement.removeEventListener('click', onUploadFormClose);
+  effectsListElement.removeEventListener('change', onImageEffectChange);
   document.removeEventListener('keydown', onCancelUploadEscKeydown);
   removeScaleListeners();
   resetDataForm();
@@ -58,7 +58,7 @@ function onCancelUploadEscKeydown (evt) {
     } if (popUpsStack.length === 1) {
       evt.preventDefault();
       popUpsStack = [];
-      return closeUploadForm();
+      return onUploadFormClose();
     }
   }
 }
@@ -67,10 +67,10 @@ const openModalForm = (element) => {
   element.addEventListener('change', (evt) => {
     evt.preventDefault();
     openUploadForm();
-    cancelUploadButtonElement.addEventListener('click', closeUploadForm);
+    cancelUploadButtonElement.addEventListener('click', onUploadFormClose);
     document.addEventListener('keydown', onCancelUploadEscKeydown);
     popUpsStack.push(element);
   });
 };
 
-export {openModalForm,closeUploadForm};
+export {openModalForm,onUploadFormClose};
