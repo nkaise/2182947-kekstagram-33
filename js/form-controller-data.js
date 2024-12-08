@@ -14,7 +14,7 @@ const MAX_HASHTAGS_LIST = 5;
 const MAX_COMMENT_LENGTH = 140;
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
-  SENDING: 'Опубликовываю...'
+  SENDING: 'Публикую...'
 };
 
 export {ErrorMessage,StatusOption,VALID_HASHTAG,ZERO_LENGTH,MAX_HASHTAGS_LIST,SubmitButtonText,MAX_COMMENT_LENGTH};

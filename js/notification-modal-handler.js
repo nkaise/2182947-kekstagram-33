@@ -1,23 +1,46 @@
-import {StatusOption,ALERT_SHOW_TIME} from './notification-modal-handler-data';
+import {StatusOption,ALERT_SHOW_TIME,TAG_NAME,INNER_CLASSNAME} from './notification-modal-handler-data';
+import {isEscapeKey} from './utils';
 
-const notificationModalHandler = (status) => {
+const closeErrorStatusMessageBtn = (status) => {
   const statusMessage = document.querySelector(`.${status}`);
-  const statusButtonElement = statusMessage.querySelector(`.${status}__button`);
-  statusButtonElement.addEventListener('click', () => {
+  const statusButtonElement = statusMessage.querySelector(`.${status}__${TAG_NAME}`);
+  const removeMessage = () => {
     statusMessage.remove();
-  });
-  document.addEventListener('keydown', (evt) => {
-    evt.stopPropagation();
-    statusMessage.remove();
-  });
-  document.addEventListener('click', (evt) => {
-    if (!evt.target.closest(`.${status}__inner`)) {
-      statusMessage.remove();
+    document.removeEventListener('click', onClickOutsideHandler);
+  };
+  function onClickOutsideHandler (evt) {
+    if (!evt.target.closest(`.${status}__${INNER_CLASSNAME}`)) {
+      removeMessage();
     }
-  });
+  }
+  statusButtonElement.addEventListener('click', removeMessage);
+  document.addEventListener('click', onClickOutsideHandler);
 };
 
-const messagesHandler = (status) => {
+const closeSuccessStatusMessage = (status) => {
+  const statusMessage = document.querySelector(`.${status}`);
+  const statusButtonElement = statusMessage.querySelector(`.${status}__${TAG_NAME}`);
+  const removeMessage = () => {
+    statusMessage.remove();
+    document.removeEventListener('keydown', onKeyDownHandler);
+    document.removeEventListener('click', onClickOutsideHandler);
+  };
+  function onKeyDownHandler (evt){
+    if (isEscapeKey(evt)) {
+      removeMessage();
+    }
+  }
+  function onClickOutsideHandler (evt) {
+    if (!evt.target.closest(`.${status}__${INNER_CLASSNAME}`)) {
+      removeMessage();
+    }
+  }
+  statusButtonElement.addEventListener('click', removeMessage);
+  document.addEventListener('keydown', onKeyDownHandler);
+  document.addEventListener('click', onClickOutsideHandler);
+};
+
+const showStatusMessage = (status) => {
   const messageUploadTemplate = document.querySelector(`#${status}`).content.querySelector(`.${status}`);
   const textMessage = messageUploadTemplate.cloneNode(true);
   const container = document.body;
@@ -26,10 +49,19 @@ const messagesHandler = (status) => {
     setTimeout(() => {
       textMessage.remove();
     }, ALERT_SHOW_TIME);
+    return;
   }
-  if (status === StatusOption.SUCCESS_STATUS || status === StatusOption.ERROR_STATUS) {
-    notificationModalHandler(status);
+  if (status === StatusOption.SUCCESS_STATUS) {
+    closeSuccessStatusMessage(status);
+    return;
+  }
+  if (status === StatusOption.ERROR_STATUS) {
+    closeErrorStatusMessageBtn(status);
   }
 };
 
-export {messagesHandler};
+function closeKeyDownErrorStatusMessage (status) {
+  status.remove();
+}
+
+export {showStatusMessage,closeKeyDownErrorStatusMessage};

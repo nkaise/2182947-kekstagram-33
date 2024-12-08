@@ -1,5 +1,4 @@
 import {isEscapeKey,stopPropagation} from './utils';
-import {messagesHandler} from './notification-modal-handler';
 import {sendData} from './api';
 import {VALID_HASHTAG,ErrorMessage,StatusOption,ZERO_LENGTH,MAX_HASHTAGS_LIST,SubmitButtonText,MAX_COMMENT_LENGTH} from './form-controller-data';
 
@@ -62,7 +61,7 @@ commentFieldElement.addEventListener('keydown', (evt) => {
     stopPropagation(evt);
   }
 });
-
+import {showStatusMessage} from './notification-modal-handler';
 const setUploadFormSubmit = (closeForm) => {
   uploadImageFormElement.addEventListener('submit', async (evt) => {
     evt.preventDefault();
@@ -72,11 +71,11 @@ const setUploadFormSubmit = (closeForm) => {
       const formData = new FormData(evt.target);
       await sendData({
         onSuccess: () => {
-          messagesHandler(StatusOption.SUCCESS_STATUS);
+          showStatusMessage(StatusOption.SUCCESS_STATUS);
           closeForm();
         },
         onFail: () => {
-          messagesHandler(StatusOption.ERROR_STATUS);
+          showStatusMessage(StatusOption.ERROR_STATUS);
         },
         onHandlerFinally: () => {
           unBlockSubmitButton();

@@ -4,6 +4,7 @@ const StatusOption = {
   ERROR_STATUS: 'error'
 };
 const ALERT_SHOW_TIME = 5000;
-const TAG_NAME = 'section';
+const TAG_NAME = 'button';
+const INNER_CLASSNAME = 'inner';
 
-export {StatusOption,ALERT_SHOW_TIME,TAG_NAME};
+export {StatusOption,ALERT_SHOW_TIME,TAG_NAME,INNER_CLASSNAME};
