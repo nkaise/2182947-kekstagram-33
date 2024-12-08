@@ -14,15 +14,16 @@ const changeFilters = (currentFilter) => {
     activeButtonElement.classList.remove('img-filters__button--active');
   }
   currentFilter.classList.add('img-filters__button--active');
-  const currentPicturesElement = document.querySelectorAll('.picture');
-  currentPicturesElement.forEach((element) => element.remove());
 };
 
 const debouncedRenderPosts = debounce((postsToRender) => {
+  const currentPicturesElement = document.querySelectorAll('.picture');
+  currentPicturesElement.forEach((element) => element.remove());
   renderPosts(picturesContainerElement, postsToRender);
 }, RERENDER_DELAY);
 
 const filterPosts = (evt, posts) => {
+
   const initialPostsList = posts;
   if (evt.target.closest(`#${randomFilterElement.id}`)) {
     changeFilters(randomFilterElement);
