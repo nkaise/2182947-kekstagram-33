@@ -1,59 +1,76 @@
 import {isEscapeKey, toggleClassName} from './utils';
 import {handleScaleListeners,removeScaleListeners,resetScaleValue} from './scale-modifier';
 import {stylesHandler} from './image-effects';
+import {pristine} from './form-controller';
+import {closeKeyDownErrorStatusMessage} from './notification-modal-handler';
+import {StatusOption} from './notification-modal-handler-data';
 
-const uploadImageForm = document.querySelector('#upload-select-image');
-const uploadImageOverlay = uploadImageForm.querySelector('.img-upload__overlay');
-const cancelUploadButton = uploadImageForm.querySelector('.img-upload__cancel');
-const effectLevelSliderContainer = uploadImageForm.querySelector('.img-upload__effect-level');
-const effectsListElement = uploadImageForm.querySelector('.effects__list');
-const imageUploadedPreviewElement = uploadImageForm.querySelector('.img-upload__preview img');
+const uploadImageFormElement = document.querySelector('#upload-select-image');
+const uploadImageOverlayElement = uploadImageFormElement.querySelector('.img-upload__overlay');
+const cancelUploadButtonElement = uploadImageFormElement.querySelector('.img-upload__cancel');
+const effectLevelSliderContainerElement = uploadImageFormElement.querySelector('.img-upload__effect-level');
+const effectsListElement = uploadImageFormElement.querySelector('.effects__list');
+const imageUploadedPreviewElement = uploadImageFormElement.querySelector('.img-upload__preview img');
+let popUpsStack = [];
 
-const openUploadingForm = () => {
-  toggleClassName(uploadImageOverlay, 'hidden');
+const openUploadForm = () => {
+  toggleClassName(uploadImageOverlayElement, 'hidden');
   toggleClassName(document.body, 'modal-open');
   handleScaleListeners();
-  effectLevelSliderContainer.classList.add('hidden');
+  effectLevelSliderContainerElement.classList.add('hidden');
   effectsListElement.addEventListener('change', stylesHandler);
 };
 
-const resetDataForm = () => {
-  resetScaleValue();
-  uploadImageForm.reset();
-  imageUploadedPreviewElement.removeAttribute('style');
-};
-
 const removeErrorPristineElements = () => {
-  const errorPristineElements = uploadImageForm.querySelectorAll('.pristine-error');
+  const errorPristineElements = uploadImageFormElement.querySelectorAll('.pristine-error');
   errorPristineElements.forEach((error) => {
     error.remove();
   });
 };
 
-const closeUploadingForm = () => {
-  toggleClassName(uploadImageOverlay, 'hidden');
+const resetDataForm = () => {
+  resetScaleValue();
+  uploadImageFormElement.reset();
+  imageUploadedPreviewElement.removeAttribute('style');
+  removeErrorPristineElements();
+  pristine.reset();
+};
+
+const closeUploadForm = () => {
+  toggleClassName(uploadImageOverlayElement, 'hidden');
   toggleClassName(document.body, 'modal-open');
-  document.removeEventListener('keydown', onCancelUploadEscKeydown);
-  cancelUploadButton.removeEventListener('click', closeUploadingForm);
+  cancelUploadButtonElement.removeEventListener('click', closeUploadForm);
   effectsListElement.removeEventListener('change', stylesHandler);
+  document.removeEventListener('keydown', onCancelUploadEscKeydown);
   removeScaleListeners();
   resetDataForm();
-  removeErrorPristineElements();
 };
 
 function onCancelUploadEscKeydown (evt) {
+  const errorStatusElement = document.querySelector(`.${StatusOption.ERROR_STATUS}`);
+  if (errorStatusElement) {
+    popUpsStack.push(errorStatusElement);
+  }
   if (isEscapeKey(evt)) {
-    closeUploadingForm();
+    if (popUpsStack.length > 1) {
+      popUpsStack.pop();
+      return closeKeyDownErrorStatusMessage(errorStatusElement);
+    } if (popUpsStack.length === 1) {
+      evt.preventDefault();
+      popUpsStack = [];
+      return closeUploadForm();
+    }
   }
 }
 
 const openModalForm = (element) => {
   element.addEventListener('change', (evt) => {
     evt.preventDefault();
-    openUploadingForm();
-    cancelUploadButton.addEventListener('click', closeUploadingForm);
+    openUploadForm();
+    cancelUploadButtonElement.addEventListener('click', closeUploadForm);
     document.addEventListener('keydown', onCancelUploadEscKeydown);
+    popUpsStack.push(element);
   });
 };
 
-export {openModalForm,closeUploadingForm};
+export {openModalForm,closeUploadForm};
