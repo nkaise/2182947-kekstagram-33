@@ -19,7 +19,7 @@ const onImageScaleSmallerElementClick = () => {
   changeScaleValue();
 };
 
-const onImageScaleBiggerElement = () => {
+const onImageScaleBiggerElementClick = () => {
   changingScaleValue = parseInt(changingScaleValue, NUMERAL_SYSTEM) + ImageScale.MIN;
   changingScaleValue = Math.min(changingScaleValue, ImageScale.MAX);
   changeScaleValue();
@@ -33,12 +33,12 @@ const resetScaleValue = () => {
 
 const handleScaleListeners = () => {
   imageScaleSmallerElement.addEventListener('click', onImageScaleSmallerElementClick);
-  imageScaleBiggerElement.addEventListener('click', onImageScaleBiggerElement);
+  imageScaleBiggerElement.addEventListener('click', onImageScaleBiggerElementClick);
 };
 
 const removeScaleListeners = () => {
   imageScaleSmallerElement.removeEventListener('click', onImageScaleSmallerElementClick);
-  imageScaleBiggerElement.removeEventListener('click', onImageScaleBiggerElement);
+  imageScaleBiggerElement.removeEventListener('click', onImageScaleBiggerElementClick);
 };
 
 export {handleScaleListeners,removeScaleListeners,resetScaleValue};
