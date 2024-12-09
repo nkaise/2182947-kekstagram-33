@@ -6,15 +6,15 @@ const closeErrorStatusMessageBtn = (status) => {
   const statusButtonElement = statusMessage.querySelector(`.${status}__${TAG_NAME}`);
   const onStatusButtonClick = () => {
     statusMessage.remove();
-    document.removeEventListener('click', onOutsideMessageClick);
+    document.removeEventListener('click', onDocumentClick);
   };
-  function onOutsideMessageClick (evt) {
+  function onDocumentClick (evt) {
     if (!evt.target.closest(`.${status}__${INNER_CLASSNAME}`)) {
       onStatusButtonClick();
     }
   }
   statusButtonElement.addEventListener('click', onStatusButtonClick);
-  document.addEventListener('click', onOutsideMessageClick);
+  document.addEventListener('click', onDocumentClick);
 };
 
 const closeSuccessStatusMessage = (status) => {
@@ -23,21 +23,21 @@ const closeSuccessStatusMessage = (status) => {
   const onStatusButtonClick = () => {
     statusMessage.remove();
     document.removeEventListener('keydown', onDocumentKeyDown);
-    document.removeEventListener('click', onOutsideMessageClick);
+    document.removeEventListener('click', onDocumentClick);
   };
   function onDocumentKeyDown (evt){
     if (isEscapeKey(evt)) {
       onStatusButtonClick();
     }
   }
-  function onOutsideMessageClick (evt) {
+  function onDocumentClick (evt) {
     if (!evt.target.closest(`.${status}__${INNER_CLASSNAME}`)) {
       onStatusButtonClick();
     }
   }
   statusButtonElement.addEventListener('click', onStatusButtonClick);
   document.addEventListener('keydown', onDocumentKeyDown);
-  document.addEventListener('click', onOutsideMessageClick);
+  document.addEventListener('click', onDocumentClick);
 };
 
 const showStatusMessage = (status) => {

@@ -41,12 +41,12 @@ const onCancelUploadButtonClick = () => {
   toggleClassName(document.body, 'modal-open');
   cancelUploadButtonElement.removeEventListener('click', onCancelUploadButtonClick);
   effectsListElement.removeEventListener('change', onEffectsListChange);
-  document.removeEventListener('keydown', onCancelUploadEscKeydown);
+  document.removeEventListener('keydown', onDocumentEscKeydown);
   removeScaleListeners();
   resetDataForm();
 };
 
-function onCancelUploadEscKeydown (evt) {
+function onDocumentEscKeydown (evt) {
   const errorStatusElement = document.querySelector(`.${StatusOption.ERROR_STATUS}`);
   if (errorStatusElement) {
     popUpsStack.push(errorStatusElement);
@@ -68,7 +68,7 @@ const openModalForm = (element) => {
     evt.preventDefault();
     openUploadForm();
     cancelUploadButtonElement.addEventListener('click', onCancelUploadButtonClick);
-    document.addEventListener('keydown', onCancelUploadEscKeydown);
+    document.addEventListener('keydown', onDocumentEscKeydown);
     popUpsStack.push(element);
   });
 };
