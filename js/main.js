@@ -1,6 +1,6 @@
 import '../vendor/pristine/pristine.min.js';
 import '../vendor/nouislider/nouislider.js';
-import {openModalForm,onUploadFormClose} from './modal-handler';
+import {openModalForm,onCancelUploadButtonClick} from './modal-handler';
 import {setUploadFormSubmit} from './form-controller';
 import {getData} from './api';
 import {renderPosts,registerFilterElementEvent} from './miniature-rendering';
@@ -17,4 +17,4 @@ await getData(
   () => showStatusMessage(`${StatusOption.DATA_ERROR_STATUS}`)
 );
 fileUploadForm();
-setUploadFormSubmit(onUploadFormClose);
+setUploadFormSubmit(onCancelUploadButtonClick);

@@ -57,7 +57,7 @@ const changeEffectsElement = (min, max, step, styleFunction, isDefault) => {
   }
 };
 
-const onImageEffectChange = (evt) => {
+const onEffectsListChange = (evt) => {
   switch (evt.target.id) {
     case effectHeatId: {
       changeEffectsElement(EffectValue.EFFECT_MAX_START_VALUE, EffectValue.EFFECT_VALUE, EffectValue.EFFECT_MIN_STEP_VALUE, (value) => `brightness(${value})`, false);
@@ -88,4 +88,4 @@ const onImageEffectChange = (evt) => {
   }
 };
 
-export {onImageEffectChange};
+export {onEffectsListChange};

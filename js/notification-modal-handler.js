@@ -4,38 +4,38 @@ import {isEscapeKey} from './utils';
 const closeErrorStatusMessageBtn = (status) => {
   const statusMessage = document.querySelector(`.${status}`);
   const statusButtonElement = statusMessage.querySelector(`.${status}__${TAG_NAME}`);
-  const onMessageRemove = () => {
+  const onStatusButtonClick = () => {
     statusMessage.remove();
     document.removeEventListener('click', onOutsideMessageClick);
   };
   function onOutsideMessageClick (evt) {
     if (!evt.target.closest(`.${status}__${INNER_CLASSNAME}`)) {
-      onMessageRemove();
+      onStatusButtonClick();
     }
   }
-  statusButtonElement.addEventListener('click', onMessageRemove);
+  statusButtonElement.addEventListener('click', onStatusButtonClick);
   document.addEventListener('click', onOutsideMessageClick);
 };
 
 const closeSuccessStatusMessage = (status) => {
   const statusMessage = document.querySelector(`.${status}`);
   const statusButtonElement = statusMessage.querySelector(`.${status}__${TAG_NAME}`);
-  const onMessageRemove = () => {
+  const onStatusButtonClick = () => {
     statusMessage.remove();
     document.removeEventListener('keydown', onDocumentKeyDown);
     document.removeEventListener('click', onOutsideMessageClick);
   };
   function onDocumentKeyDown (evt){
     if (isEscapeKey(evt)) {
-      onMessageRemove();
+      onStatusButtonClick();
     }
   }
   function onOutsideMessageClick (evt) {
     if (!evt.target.closest(`.${status}__${INNER_CLASSNAME}`)) {
-      onMessageRemove();
+      onStatusButtonClick();
     }
   }
-  statusButtonElement.addEventListener('click', onMessageRemove);
+  statusButtonElement.addEventListener('click', onStatusButtonClick);
   document.addEventListener('keydown', onDocumentKeyDown);
   document.addEventListener('click', onOutsideMessageClick);
 };
